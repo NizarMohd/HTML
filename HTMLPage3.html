@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script type="text/javascript">
+        function profile() {
+
+            var person = { name: "", age: "", tag: "" };
+            var x = document.getElementById("frm1");
+            var out = "These are the details entered: \n";
+            for (var i=0; i<3 ; i++){
+                if(!x.elements[i].value){
+                    alert("missing input!!!!!");
+                    return;
+                }
+                out += x.elements[i].value + ", ";
+            }
+            document.getElementById("displayInfo").innerHTML = out ;
+        }
+    </script>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <form id="frm1" action="/action_page.php">
+        name: <input type="text" name="name"><br>
+        age: <input type="text" name="age"><br>
+        tag: <input type="text" name="tag" /><br>
+        <input type="button" onclick="profile()" value="Submit">
+    </form>
+    <p id="displayInfo"></p>
+</body>
+</html>

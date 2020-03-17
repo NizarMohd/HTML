@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Profile</h1>
+    <p id ="demo" style = "font-size: 16px; color: fuchsia">blah blah blah</p>  <!-- <p></p> is to create a paragraph -->
+    <button type="button" onclick="document.getElementById('demo').innerHTML = 'Hello World.<br /> My name is Jennifer.
+     <br /> What is your name?'">Click me!</button>
+    <!-- px is 1/96 of 1 inch and pt is 1/72 of 1 inch. so px is smaller than pt in font size -->
+    <button type="button" onclick="document.getElementById('demo').style.fontSize = '35px'">I CANT READ!</button>
+    <button type="button" onclick="document.getElementById('demo').style.fontSize = '16px'"> Original size</button>
+    <button type="button" onclick="document.getElementById('demo').style.fontSize = '12px'"> make it smol!!</button>
+    <button type="button" onclick="document.getElementById('demo').style.display = 'none'">ok can hide liao</button>
+    <!-- onclick allows script to run when user clicks. in this case is JavaScript method, getElementById() -->
+    <p><br /></p>
+    <img id="untitled" src="Untitled.png" />
+    <button type="button" onclick="document.getElementById('untitled').src = 'Untitled2.png'">Click Me to make me happy!</button>\
+    <p><br /></p>
+
+</body>
+</html>
