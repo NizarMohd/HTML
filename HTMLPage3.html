@@ -2,13 +2,12 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
     <script type="text/javascript">
         function profile() {
-
-            var person = { name: "", age: "", tag: "" };
-            var x = document.getElementById("frm1");
-            var out = "These are the details entered: \n";
-            for (var i=0; i<3 ; i++){
+            const x = document.getElementById("frm1");  // const is a signal that variable will not be reassigned.
+            let out = "These are the details entered: \n";  // let is a signal that variable may be reassigned.
+            for (let i=0; i<3 ; i++){
                 if(!x.elements[i].value){
                     alert("missing input!!!!!");
                     return;
@@ -17,12 +16,48 @@
             }
             document.getElementById("displayInfo").innerHTML = out ;
         }
+
+        function exportTableToExcel( tableID, filename = '') {
+
+            let link;
+            const dataType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(tableID);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            filename = filename?filename+'.xls':'excel_data.xls'; //if filename exist, then assign to that name.
+            link = document.createElement("a"); // creates an anchor tag
+            document.body.appendChild(link); // document is the content of the page
+            if(navigator.msSaveOrOpenBlob){    // method saves the File or Blob to disk.
+                                               // This method behaves in the same way as Navigator.msSaveBlob()
+                                               // except that this enables the file open option. BLOB is binary large
+                                               // object.
+                var blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob( blob, filename);
+            }else{
+                // Create a link to the file
+                link.href = 'data:' + dataType + ', ' + tableHTML;
+
+                // Setting the file name
+                link.download = filename;
+
+                //triggering the function
+                link.click();
+            }
+
+        }
+
     </script>
     <meta charset="utf-8" />
     <title></title>
 </head>
 
 <body>
+
+<p id="head", style="animation: ease-in; font-size: 24px ; color: darkolivegreen;">
+    This page explores the table element and the form element.</p>
+
     <form id="frm1" action="/action_page.php">
         name: <input type="text" name="name"><br>
         age: <input type="text" name="age"><br>
@@ -30,5 +65,30 @@
         <input type="button" onclick="profile()" value="Submit">
     </form>
     <p id="displayInfo"></p>
+
+    <table id="tblData">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Country</th>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>john@gmail.com</td>
+            <td>USA</td>
+        </tr>
+        <tr>
+            <td>Michael Addison</td>
+            <td>michael@gmail.com</td>
+            <td>UK</td>
+        </tr>
+        <tr>
+            <td>Sam Farmer</td>
+            <td>sam@gmail.com</td>
+            <td>France</td>
+        </tr>
+    </table>
+
+    <button onclick="exportTableToExcel('tblData')">Export Table Data To Excel File</button>
 </body>
 </html>

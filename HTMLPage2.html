@@ -2,23 +2,112 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script>
+        // language=HTML format=false
+        const greetings  = `Hello World.<br /> My name is Jennifer.<br />  What is your name?<br />`;
+        const blah =  'blah blah blah<br />';
+        let status = 'display';
+        let faceStatus = 'sad';
+        let greetingStatus = 'blah';
+
+        function clickMeBehaviour() {
+            if(status === 'none'){
+                document.getElementById('demo').style.display = 'block';
+                document.getElementById('demo').innerHTML = blah ;
+                status = 'display';
+            } else {
+                if (greetingStatus === 'blah') {
+                    document.getElementById('demo').innerHTML = greetings;
+                    greetingStatus = 'greetings';
+                } else {
+                    document.getElementById('demo'). innerHTML = blah;
+                    greetingStatus = 'blah';
+                }
+            }
+        }
+
+        function iCantRead() {
+            document.getElementById('demo').style.fontSize = '35px'
+        }
+
+        function small() {
+            document.getElementById('demo').style.fontSize = '12px';
+        }
+
+        function originalSize() {
+            document.getElementById('demo').style.fontSize = '16px'
+        }
+
+        function hide() {
+            document.getElementById('demo').style.display = 'none';
+            status = 'none';
+        }
+
+        function display() {
+            document.getElementById('demo').style.display = 'block';
+            status = 'display';
+        }
+
+        function setVisibility() {
+            if(status === 'display') {
+                hide();
+                document.getElementById('displayButton').innerText = 'display the text!' ;
+            } else {
+                document.getElementById('displayButton').innerText = 'hide the text!';
+                display();
+            }
+        }
+
+        function makeMeHappy() {
+            document.getElementById('untitled').src = 'Untitled2.png';
+            faceStatus = 'happy';
+        }
+        function makeMeSad() {
+            document.getElementById('untitled').src = 'Untitled.png';
+            faceStatus = 'sad'
+        }
+
+        function changeFace() {
+            if(faceStatus === 'sad') {
+                makeMeHappy();
+                document.getElementById('face').innerText = 'Click Me to make me sad!';
+            } else {
+                makeMeSad();
+                document.getElementById('face').innerText = 'Click Me to make me happy!';
+            }
+        }
+    </script>
+    <style>
+        @keyframes move {
+            0%   {left:0; top:0;}
+            25%  {left:200px; top:0;}
+            50%  {left:200px; top:200px;}
+            75%  {left:0; top:200px;}
+            100% {left:0; top:0;}
+        }
+        img {
+            position: relative;
+            animation-name: move;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+        }
+    </style>
     <meta charset="utf-8" />
     <title>Profile</title>
 </head>
 <body>
     <h1>Profile</h1>
     <p id ="demo" style = "font-size: 16px; color: fuchsia">blah blah blah</p>  <!-- <p></p> is to create a paragraph -->
-    <button type="button" onclick="document.getElementById('demo').innerHTML = 'Hello World.<br /> My name is Jennifer.
-     <br /> What is your name?'">Click me!</button>
+    <button type="button" onclick="clickMeBehaviour()">Click me!</button>
     <!-- px is 1/96 of 1 inch and pt is 1/72 of 1 inch. so px is smaller than pt in font size -->
-    <button type="button" onclick="document.getElementById('demo').style.fontSize = '35px'">I CANT READ!</button>
-    <button type="button" onclick="document.getElementById('demo').style.fontSize = '16px'"> Original size</button>
-    <button type="button" onclick="document.getElementById('demo').style.fontSize = '12px'"> make it smol!!</button>
-    <button type="button" onclick="document.getElementById('demo').style.display = 'none'">ok can hide liao</button>
+    <button type="button" onclick="iCantRead()">I CANT READ!</button>
+    <button type="button" onclick="originalSize()"> Original size</button>
+    <button type="button" onclick="small()"> make it smol!!</button>
+    <button id="displayButton" type="button" onclick="setVisibility()">hide the text!</button>
+    <button id="face" type="button" onclick="changeFace()">Click Me to make me happy!</button>
     <!-- onclick allows script to run when user clicks. in this case is JavaScript method, getElementById() -->
     <p><br /></p>
-    <img id="untitled" src="Untitled.png" />
-    <button type="button" onclick="document.getElementById('untitled').src = 'Untitled2.png'">Click Me to make me happy!</button>\
+    <img height="648" id="untitled" src="Untitled.png" width="1152" alt=""/>
     <p><br /></p>
 
 </body>
