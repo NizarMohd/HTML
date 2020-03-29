@@ -6,4 +6,4 @@ HTML practice
 1. To better understand front-end languages.
 1. To be able to display useful information using the languages learn.
 
-Click [here](https://nizarmohd.github.io/HTML/)
+Click [here](https://nizarmohd.github.io/HTML/HTMLPage1.html)
