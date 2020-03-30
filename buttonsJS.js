@@ -54,11 +54,11 @@ function setVisibility() {
 }
 
 function makeMeHappy() {
-    document.getElementById('untitled').src = 'Untitled2.png';
+    document.getElementById('untitled').src = 'images/Untitled2.png';
     faceStatus = 'happy';
 }
 function makeMeSad() {
-    document.getElementById('untitled').src = 'Untitled.png';
+    document.getElementById('untitled').src = 'images/Untitled.png';
     faceStatus = 'sad'
 }
 
