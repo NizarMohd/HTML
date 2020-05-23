@@ -1,331 +1,194 @@
-﻿<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<!-- background is from an open source code. https://codepen.io/at80/pen/tqdmv -->
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Main</title>
-    <style>
-        body {
-            padding:0;
-            margin:0;
-            overflow:hidden;
-            height: 100px;
-        }
-        canvas {
-            padding:0;
-            margin:0;
-        }
-        div.btnbg {
-            position: fixed;
-            left:30%;
-            top:20%;
-        }
-        .text {
-            text-align: center;
-            position: center;
-            font-size: 30px;
-        }
-    </style>
+﻿
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 
-</head>
+<!--setting font for every header -->
+<style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    .w3-bar-block .w3-bar-item {padding:20px}
+</style>
 <body>
-<script src="sakura.js">
-</script>
-<canvas id="sakura"></canvas>
-<div class="btnbg">
-    <h1 class="text">Welcome to my first web page</h1>
-    <p class="text">Profile</p>
-    <p class="text">Instagram: <a href="https://www.instagram.com/ninzyirl/?hl=en"> click here </a></p>
-    <p class="text">For Next Page: <a href="HTMLPage2.html"> click here </a></p>
-    <p class="text">Profile creation : <a href="HTMLPage3.html"> click here</a></p>
-    <p class="text"><a href="HTMLPage4.html"> Click here </a> to see interactivity implementation</p>
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()"
+       class="w3-bar-item w3-button">Close Menu</a>
+    <a href="#photos" onclick="w3_close()" class="w3-bar-item w3-button">Photos</a>
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+</nav>
+
+<!-- Top menu -->
+<div class="w3-top" id="top">
+    <div class="w3-white w3-xlarge" style="max-width:1200px;margin: auto">
+        <div class="w3-button w3-padding-16" onclick="w3_open()">☰</div>
+        <div class="w3-right w3-padding-16">Mail</div>
+        <div class="w3-center w3-padding-16">My first website</div>
+    </div>
 </div>
-<!-- sakura shader -->
-<script id="sakura_point_vsh" type="x-shader/x_vertex">
-uniform mat4 uProjection;
-uniform mat4 uModelview;
-uniform vec3 uResolution;
-uniform vec3 uOffset;
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
 
-attribute vec3 aPosition;
-attribute vec3 aEuler;
-attribute vec2 aMisc; //x:size, y:fade
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px" id="page">
+    <div class="w3-panel w3-leftbar w3-sand w3-xlarge w3-serif" style="max-width:1200px">
+        <p style="text-align: center"><i>"The key is to keep it simple"</i></p>
+    </div>
+    <!-- First Photo Grid-->
+    <div class="w-row-padding w3-padding-16 w3-center" id="photos">
+        <div class="w3-rest" >
+            <img id="current_photo" src="images/Sceneries/flowers.jpg" alt="current_photo" style="width:500px; height: 600px" >
+            <h3 id="current_heading">A weed is but an unloved flower.</h3>
+            <p id="current_para">Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+        </div>
+    </div>
 
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
 
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
+    <!-- Pagination -->
+    <div class="w3-center w3-padding-32">
+        <div class="w3-bar">
+            <a href="#"  onclick="w3_prevImage()" class="w3-bar-item w3-button w3-hover-black">«</a>
+            <a id="one" href="#" onclick="w3_change(1)" class="w3-bar-item w3--hover-black w3-button w3-black">1</a>
+            <a id="two" href="#" onclick="w3_change(2)" class="w3-bar-item w3-button w3-hover-black">2</a>
+            <a id="three" href="#" onclick="w3_change(3)" class="w3-bar-item w3-button w3-hover-black">3</a>
+            <a id="four" href="#" onclick="w3_change(4)" class="w3-bar-item w3-button w3-hover-black">4</a>
+            <a href="#" onclick="w3_nextImage()" class="w3-bar-item w3-button w3-hover-black">»</a>
+        </div>
+    </div>
 
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
+    <hr id="about">
 
-void main(void) {
-    // Projection is based on vertical angle
-    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);
-    gl_Position = uProjection * pos;
-    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;
+    <!-- About Section -->
+    <div class="w3-container w3-padding-32 w3-center">
+        <h3>About</h3><br>
+        <div class="w3-padding-32">
+            <h4><b>Donec lobortis enim velit</b></h4>
+            <h6><i>With Passion For Real, Good Food</i></h6>
+            <p>Suspendisse id urna eros. Donec magna metus, accumsan sit amet mattis at, fringilla non mauris. Mauris
+                non tellus eget libero pulvinar suscipit in sit amet dui. Proin fringilla pulvinar risus a facilisis.
+                Morbi vulputate ipsum ex, in sagittis arcu laoreet a. Vestibulum sed mi iaculis, vestibulum augue vitae,
+                dictum lacus.</p>
+        </div>
+    </div>
+    <hr>
 
-    pposition = pos.xyz;
-    psize = aMisc.x;
-    pdist = length(pos.xyz);
-    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);
+    <!-- Footer -->
+    <footer class="w3-row-padding w3-padding-32">
+        <div class="w3-third">
+            <h3>FOOTER</h3>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+        </div>
 
-    vec3 elrsn = sin(aEuler);
-    vec3 elrcs = cos(aEuler);
-    mat3 rotx = mat3(
-        1.0, 0.0, 0.0,
-        0.0, elrcs.x, elrsn.x,
-        0.0, -elrsn.x, elrcs.x
-    );
-    mat3 roty = mat3(
-        elrcs.y, 0.0, -elrsn.y,
-        0.0, 1.0, 0.0,
-        elrsn.y, 0.0, elrcs.y
-    );
-    mat3 rotz = mat3(
-        elrcs.z, elrsn.z, 0.0,
-        -elrsn.z, elrcs.z, 0.0,
-        0.0, 0.0, 1.0
-    );
-    mat3 rotmat = rotx * roty * rotz;
-    normal = rotmat[2];
+        <div class="w3-third">
+            <h3>BLOG POSTS</h3>
+            <ul class="w3-ul w3-hoverable">
+                <li class="w3-padding-16">
+                    <img src="images/food/xinfutang.jpg" class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Food Blog</span><br>
+                    <span>Sed mattis nunc</span>
+                </li>
+                <li class="w3-padding-16">
+                    <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Ipsum</span><br>
+                    <span>Praes tinci sed</span>
+                </li>
+            </ul>
+        </div>
 
-    mat3 trrotm = mat3(
-        rotmat[0][0], rotmat[1][0], rotmat[2][0],
-        rotmat[0][1], rotmat[1][1], rotmat[2][1],
-        rotmat[0][2], rotmat[1][2], rotmat[2][2]
-    );
-    normX = trrotm[0];
-    normY = trrotm[1];
-    normZ = trrotm[2];
+        <div class="w3-third w3-serif">
+            <h3>POPULAR TAGS</h3>
+            <p>
+                <span class="w3-tag w3-black w3-margin-bottom">Bliss</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Los Angeles</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Wonderland</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Weed</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flower</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Smile</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Singapore</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flavors</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Chill</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dog</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Roller Coaster</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Happy</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Garden By the Bay</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">People</span>
+            </p>
+        </div>
+    </footer>
 
-    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);
+    <!-- End page content -->
+</div>
 
-    float tmpdfs = dot(lit, normal);
-    if(tmpdfs < 0.0) {
-        normal = -normal;
-        tmpdfs = dot(lit, normal);
-    }
-    diffuse = 0.4 + tmpdfs;
-
-    vec3 eyev = normalize(-pos.xyz);
-    if(dot(eyev, normal) > 0.0) {
-        vec3 hv = normalize(eyev + lit);
-        specular = pow(max(dot(hv, normal), 0.0), 20.0);
-    }
-    else {
-        specular = 0.0;
-    }
-
-    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);
-    rstop = pow(rstop, 0.5);
-    //-0.69315 = ln(0.5)
-    distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));
-}
-</script>
-<script id="sakura_point_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
-
-const vec3 fadeCol = vec3(0.08, 0.03, 0.06);
-
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
-
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
-
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
-
-float ellipse(vec2 p, vec2 o, vec2 r) {
-    vec2 lp = (p - o) / r;
-    return length(lp) - 1.0;
-}
-
-void main(void) {
-    vec3 p = vec3(gl_PointCoord - vec2(0.5, 0.5), 0.0) * 2.0;
-    vec3 d = vec3(0.0, 0.0, -1.0);
-    float nd = normZ.z; //dot(-normZ, d);
-    if(abs(nd) < 0.0001) discard;
-
-    float np = dot(normZ, p);
-    vec3 tp = p + d * np / nd;
-    vec2 coord = vec2(dot(normX, tp), dot(normY, tp));
-
-    //angle = 15 degree
-    const float flwrsn = 0.258819045102521;
-    const float flwrcs = 0.965925826289068;
-    mat2 flwrm = mat2(flwrcs, -flwrsn, flwrsn, flwrcs);
-    vec2 flwrp = vec2(abs(coord.x), coord.y) * flwrm;
-
-    float r;
-    if(flwrp.x < 0.0) {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.36, 0.96) * 0.5);
-    }
-    else {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.58, 0.96) * 0.5);
+<script>
+    // Script to open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
     }
 
-    if(r > rstop) discard;
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
 
-    vec3 col = mix(vec3(1.0, 0.8, 0.75), vec3(1.0, 0.9, 0.87), r);
-    float grady = mix(0.0, 1.0, pow(coord.y * 0.5 + 0.5, 0.35));
-    col *= vec3(1.0, grady, grady);
-    col *= mix(0.8, 1.0, pow(abs(coord.x), 0.3));
-    col = col * diffuse + specular;
+    // Script to change pagination
+    let currentImage = 1;
+    function w3_change(x) {
+        switch (x) {
+            case 1 :
+                document.getElementById("current_photo").src = "images/Sceneries/flowers.jpg";
+                document.getElementById("current_heading").innerText = "A weed is but an unloved flower";
+                document.getElementById("current_para").innerText = "Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.";
+                document.getElementById("one").className = "w3-bar-item w3--hover-black w3-button w3-black";
+                document.getElementById("two").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("three").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("four").className = "w3-bar-item w3--hover-black w3-button";
+                currentImage = 1;
+                console.log("Changed to first image");
+                break;
+            case 2 :
+                document.getElementById("current_photo").src = "images/Sceneries/LADog.jpg";
+                document.getElementById("current_heading").innerText = "Want a friend? Get a dog.";
+                document.getElementById("current_para").innerText = "Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.";
+                document.getElementById("two").className = "w3-bar-item w3--hover-black w3-button w3-black";
+                document.getElementById("one").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("three").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("four").className = "w3-bar-item w3--hover-black w3-button";
+                currentImage = 2;
+                console.log("Changed to second image");
+                break;
+            case 3 :
+                document.getElementById("current_photo").src = "images/Sceneries/wonderland.jpg";
+                document.getElementById("current_heading").innerText = "Us against the world";
+                document.getElementById("current_para").innerText = "Lorem ipsum text praesent tincidunt ipsum lipsum.";
+                document.getElementById("three").className = "w3-bar-item w3--hover-black w3-button w3-black";
+                document.getElementById("one").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("two").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("four").className = "w3-bar-item w3--hover-black w3-button";
+                currentImage = 3;
+                console.log("Changed to third image");
+                break;
+            case 4 :
+                document.getElementById("current_photo").src = "images/Sceneries/LASantaMonica.jpg";
+                document.getElementById("current_heading").innerText = "Home is when you are with me<";
+                document.getElementById("current_para").innerText = "Lorem ipsum text praesent tincidunt ipsum lipsum.";
+                document.getElementById("four").className = "w3-bar-item w3--hover-black w3-button w3-black";
+                document.getElementById("two").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("three").className = "w3-bar-item w3--hover-black w3-button";
+                document.getElementById("one").className = "w3-bar-item w3--hover-black w3-button";
+                currentImage = 4;
+                console.log("Changed to fourth image");
+                break;
+        }
+    }
+        function w3_nextImage() {
+            currentImage++;
+            if (currentImage >= 5) {
+                currentImage = 1;
+            }
+            w3_change(currentImage);
+        }
 
-    col = mix(fadeCol, col, distancefade);
+        function w3_prevImage() {
+            currentImage--;
+            if (currentImage <= 0) {
+                currentImage = 4;
+            }
+            w3_change(currentImage);
+        }
 
-    float alpha = (rstop > 0.001)? (0.5 - r / (rstop * 2.0)) : 1.0;
-    alpha = smoothstep(0.0, 1.0, alpha) * palpha;
-
-    gl_FragColor = vec4(col * 0.5, alpha);
-}
 </script>
-<!-- effects -->
-<script id="fx_common_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-</script>
-<script id="bg_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-
-uniform vec2 uTimes;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec3 col;
-    float c;
-    vec2 tmpv = texCoord * vec2(0.8, 1.0) - vec2(0.95, 1.0);
-    c = exp(-pow(length(tmpv) * 1.8, 2.0));
-    col = mix(vec3(0.02, 0.0, 0.03), vec3(0.96, 0.98, 1.0) * 1.5, c);
-    gl_FragColor = vec4(col * 0.5, 1.0);
-}
-</script>
-<script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
-}
-</script>
-<script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-uniform vec4 uBlurDir; //dir(x, y), stride(z, w)
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    col = col + texture2D(uSrc, texCoord + uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord - uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord + (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    col = col + texture2D(uSrc, texCoord - (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    gl_FragColor = col / 5.0;
-}
-</script>
-<!-- effect fragment shader template -->
-<script id="fx_common_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_FragColor = texture2D(uSrc, texCoord);
-}
-</script>
-<!-- post processing -->
-<script id="pp_final_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-</script>
-<script id="pp_final_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform sampler2D uBloom;
-uniform vec2 uDelta;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    vec4 srccol = texture2D(uSrc, texCoord) * 2.0;
-    vec4 bloomcol = texture2D(uBloom, texCoord);
-    vec4 col;
-    col = srccol + bloomcol * (vec4(1.0) + srccol);
-    col *= smoothstep(1.0, 0.0, pow(length((texCoord - vec2(0.5)) * 2.0), 1.2) * 0.5);
-    col = pow(col, vec4(0.45454545454545)); //(1.0 / 2.2)
-
-    gl_FragColor = vec4(col.rgb, 1.0);
-    gl_FragColor.a = 1.0;
-}
-</script>
-
 </body>
 </html>
+

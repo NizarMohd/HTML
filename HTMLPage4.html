@@ -1,109 +1,118 @@
 <!DOCTYPE html>
-<!-- background obtained from https://codepen.io/mladen___/pen/gbvqBo -->
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 
-        .container {
-            position: relative;
-            width: 50%;
-        }
-        .image {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #008CBA;
-            overflow: hidden;
-            width: 100%;
-            height: 0;
-            transition: .5s ease;
-        }
+<!--setting font for every header -->
+<style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    .w3-bar-block .w3-bar-item {padding:20px}
+</style>
 
-        .container:hover .overlay {
-            height: 100%;
-        }
-
-        .row {
-            position: fixed;
-            display: flex;
-            left: 20%;
-            top: 20%;
-        }
-
-        .column {
-            flex: 50%;
-            padding: 5px;
-            width: 100%;
-        }
-
-        .text {
-            white-space: nowrap;
-            color: white;
-            font-size: inherit;
-            position: absolute;
-            overflow: hidden;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-        }
-
-        .button {
-            position: relative;
-            display: flex;
-            bottom: 50%;
-            left: 47.5%;
-        }
-
-        html{
-            height: 100%;
-        }
-        body{
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            cursor: none;
-        }
-        #canvas{
-            background-color: #2c343f;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>
 <body>
-<canvas id="canvas"></canvas>
-<script src="backgroundAnimation.js"></script>
-<div class="row">
-    <div class="container">
-<div class="container">
-    <img src="images/Sceneries/IMG_2235.jpg" alt="food" class="image">
-    <div class="overlay">
-        <div class="text">This will be a platform for me to explore how</div>
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()"
+       class="w3-bar-item w3-button">Close Menu</a>
+    <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Photos</a>
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+</nav>
+
+<!-- Top menu -->
+<div class="w3-top" id="top">
+    <div class="w3-white w3-xlarge" style="max-width:1200px;margin: auto">
+        <div class="w3-button w3-padding-16" onclick="w3_open()">☰</div>
+        <div class="w3-right w3-padding-16">Mail</div>
+        <div class="w3-center w3-padding-16">My first website</div>
     </div>
 </div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px" id="page">
+    <div class="w3-panel w3-leftbar w3-sand w3-xlarge w3-serif" style="max-width:1200px">
+        <p style="text-align: center"><i>"The key is to keep it simple"</i></p>
     </div>
-    <div class="column">
-<div class="container">
-    <img src="images/Sceneries/flowers.jpg" alt="flowers" class="image">
-    <div class="overlay">
-        <div class="text">CSS and JS can complement each other</div>
+
+    <!-- First Photo Grid-->
+    <div class="w-row-padding w3-padding-16 w3-center" id="food">
+        <div class="w3-quarter" >
+            <img src="images/Sceneries/IMG_1208.jpg"  style="width:100%; height:400px">
+            <h3>Sunset</h3>
+            <p>Summo aperiri delicatissimi id his, sit in sensibus voluptaria. Est dicta debet noluisse in, vel sint ridens ut, et tractatos vulputate eam.</p>
+        </div>
+        <div class="w3-quarter" >
+            <img src="images/Sceneries/IMG_2653.jpg" style="width:100%; height: 400px">
+            <h3></h3>
+            <p>At amet facilisi mel, has ad homero detracto hendrerit. Modus porro mea ne, quod ipsum te usu.</p>
+        </div>
+        <div class="w3-quarter" >
+            <img src="images/Sceneries/IMG_2177.jpg" style="width:100%; height: 400px">
+            <h3>The Iconic, Xin Fu Tang</h3>
+            <p>Inermis fastidii conclusionemque vel at, qui ut tractatos intellegat.
+            </p>
+        </div>
+        <div class="w3-quarter" >
+            <img src="images/Sceneries/IMG_2237.jpg" style="width:100%; height: 400px">
+            <h3>Nothing is as glorious as a well done cheeseburger</h3>
+            <p>Qui legendos constituto ea, ei movet sensibus sit. In cibo meis nostrud est, te possit delicatissimi cum. </p>
+        </div>
     </div>
-</div>
+
+    <!-- About Section -->
+    <div class="w3-container w3-padding-32 w3-center">
+        <h3>About</h3><br>
+        <div class="w3-padding-32">
+            <h4><b>Donec lobortis enim velit</b></h4>
+            <h6><i>With Passion For Real, Good Food</i></h6>
+            <p>Suspendisse id urna eros. Donec magna metus, accumsan sit amet mattis at, fringilla non mauris. Mauris
+                non tellus eget libero pulvinar suscipit in sit amet dui. Proin fringilla pulvinar risus a facilisis.
+                Morbi vulputate ipsum ex, in sagittis arcu laoreet a. Vestibulum sed mi iaculis, vestibulum augue vitae,
+                dictum lacus.</p>
+        </div>
     </div>
+    <hr>
+
+    <!-- Footer -->
+    <footer class="w3-row-padding w3-padding-32">
+        <div class="w3-third">
+            <h3>FOOTER</h3>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+        </div>
+
+        <div class="w3-third">
+            <h3>BLOG POSTS</h3>
+            <ul class="w3-ul w3-hoverable">
+                <li class="w3-padding-16">
+                    <img src="images/Sceneries/LADog.jpg" class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Food Blog</span><br>
+                    <span>Sed mattis nunc</span>
+                </li>
+                <li class="w3-padding-16">
+                    <img src="images/food/xinfutang.jpg" class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Ipsum</span><br>
+                    <span>Praes tinci sed</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="w3-third w3-serif">
+            <h3>POPULAR TAGS</h3>
+            <p>
+                <span class="w3-tag w3-black w3-margin-bottom">Bliss</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Los Angeles</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Wonderland</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Weed</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flower</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Smile</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Singapore</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flavors</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Chill</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dog</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Roller Coaster</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Happy</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Garden By the Bay</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">People</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- End page content -->
 </div>
-<div class="button">
-    <button onclick="goBack()">Go Back</button>
-    <script src="back.js"></script>
-</div>
+
 </body>
 </html>
-

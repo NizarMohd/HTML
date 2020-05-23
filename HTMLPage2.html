@@ -1,41 +1,118 @@
 ﻿<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <script src="buttonsJS.js">
-    </script>
-    <style>
-        @keyframes move {
-            0%   {left:0; top:0;}
-            25%  {left:200px; top:0;}
-            50%  {left:200px; top:200px;}
-            75%  {left:0; top:200px;}
-            100% {left:0; top:0;}
-        }
-        img {
-            position: relative;
-            animation-name: move;
-            animation-duration: 10s;
-            animation-iteration-count: infinite;
-        }
-    </style>
-    <meta charset="utf-8" />
-    <title>Profile</title>
-</head>
+<!--setting font for every header -->
+<style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    .w3-bar-block .w3-bar-item {padding:20px}
+</style>
+
 <body>
-    <h1>Profile</h1>
-    <p id ="demo" style = "font-size: 16px; color: fuchsia">blah blah blah</p>  <!-- <p></p> is to create a paragraph -->
-    <button type="button" onclick="clickMeBehaviour()">Click me!</button>
-    <!-- px is 1/96 of 1 inch and pt is 1/72 of 1 inch. so px is smaller than pt in font size -->
-    <button type="button" onclick="iCantRead()">I CANT READ!</button>
-    <button type="button" onclick="originalSize()"> Original size</button>
-    <button type="button" onclick="small()"> make it smol!!</button>
-    <button id="displayButton" type="button" onclick="setVisibility()">hide the text!</button>
-    <button id="face" type="button" onclick="changeFace()">Click Me to make me happy!</button>
-    <!-- onclick allows script to run when user clicks. in this case is JavaScript method, getElementById() -->
-    <p><br /></p>
-    <img height="648" id="untitled" src="images/Untitled.png" width="1152" alt=""/>
-    <p><br /></p>
+<!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()"
+       class="w3-bar-item w3-button">Close Menu</a>
+    <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Photos</a>
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+</nav>
+
+<!-- Top menu -->
+<div class="w3-top" id="top">
+    <div class="w3-white w3-xlarge" style="max-width:1200px;margin: auto">
+        <div class="w3-button w3-padding-16" onclick="w3_open()">☰</div>
+        <div class="w3-right w3-padding-16">Mail</div>
+        <div class="w3-center w3-padding-16">My first website</div>
+    </div>
+</div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px" id="page">
+    <div class="w3-panel w3-leftbar w3-sand w3-xlarge w3-serif" style="max-width:1200px">
+        <p style="text-align: center"><i>"The key is to keep it simple"</i></p>
+    </div>
+
+    <!-- First Photo Grid-->
+    <div class="w-row-padding w3-padding-16 w3-center" id="food">
+        <div class="w3-quarter" >
+            <img src="images/food/bagel.jpg"  style="width:100%; height:400px">
+            <h3>Feed yourself with goodness.</h3>
+            <p>Summo aperiri delicatissimi id his, sit in sensibus voluptaria. Est dicta debet noluisse in, vel sint ridens ut, et tractatos vulputate eam.</p>
+        </div>
+        <div class="w3-quarter" >
+            <img src="images/food/food.jpg" style="width:100%; height: 400px">
+            <h3>Eat well</h3>
+            <p>At amet facilisi mel, has ad homero detracto hendrerit. Modus porro mea ne, quod ipsum te usu.</p>
+        </div>
+        <div class="w3-quarter" >
+            <img src="images/food/xinfutang.jpg" style="width:100%; height: 400px">
+            <h3>The Iconic, Xin Fu Tang</h3>
+            <p>Inermis fastidii conclusionemque vel at, qui ut tractatos intellegat.
+            </p>
+        </div>
+        <div class="w3-quarter" >
+            <img src="images/food/burger.jpg" style="width:100%; height: 400px">
+            <h3>Nothing is as glorious as a well done cheeseburger</h3>
+            <p>Qui legendos constituto ea, ei movet sensibus sit. In cibo meis nostrud est, te possit delicatissimi cum. </p>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="w3-container w3-padding-32 w3-center">
+        <h3>About</h3><br>
+        <div class="w3-padding-32">
+            <h4><b>Donec lobortis enim velit</b></h4>
+            <h6><i>With Passion For Real, Good Food</i></h6>
+            <p>Suspendisse id urna eros. Donec magna metus, accumsan sit amet mattis at, fringilla non mauris. Mauris
+                non tellus eget libero pulvinar suscipit in sit amet dui. Proin fringilla pulvinar risus a facilisis.
+                Morbi vulputate ipsum ex, in sagittis arcu laoreet a. Vestibulum sed mi iaculis, vestibulum augue vitae,
+                dictum lacus.</p>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Footer -->
+    <footer class="w3-row-padding w3-padding-32">
+        <div class="w3-third">
+            <h3>FOOTER</h3>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+        </div>
+
+        <div class="w3-third">
+            <h3>BLOG POSTS</h3>
+            <ul class="w3-ul w3-hoverable">
+                <li class="w3-padding-16">
+                    <img src="images/Sceneries/LADog.jpg" class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Food Blog</span><br>
+                    <span>Sed mattis nunc</span>
+                </li>
+                <li class="w3-padding-16">
+                    <img src="images/Sceneries/IMG_2653.jpg" class="w3-left w3-margin-right" style="width:50px">
+                    <span class="w3-large">Ipsum</span><br>
+                    <span>Praes tinci sed</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="w3-third w3-serif">
+            <h3>POPULAR TAGS</h3>
+            <p>
+                <span class="w3-tag w3-black w3-margin-bottom">Bliss</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Los Angeles</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Wonderland</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Weed</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flower</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Smile</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Singapore</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flavors</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Chill</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dog</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Roller Coaster</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Happy</span>
+                <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Garden By the Bay</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">People</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- End page content -->
+</div>
 
 </body>
 </html>
