@@ -1,0 +1,9 @@
+<?php
+// connecting to database
+    $conn = mysqli_connect('localhost', 'nizar', 'Safeena2197.', 'first_database');
+
+// check connection
+    if(!$conn) {
+        echo 'Connection error: ' . mysqli_connect_error();
+    }
+?>
